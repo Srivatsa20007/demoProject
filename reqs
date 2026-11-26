@@ -1,0 +1,20 @@
+maven java
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY target/classes /app
+CMD ["java", "-cp", "/app", "com.example.my_maven_project.App"]
+
+
+docker build -t myjavaapp .
+docker run --rm myjavaapp
+docker images
+
+maven webapp
+FROM tomcat:9.0
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+
+docker rm -f mywebapp
+docker build -t mywebapp .
+docker run -d --name mywebapp -p 8086:8080 mywebapp
+docker ps
